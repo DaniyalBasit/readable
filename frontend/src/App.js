@@ -1,21 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux';
+import Header from './components/Header';
+import Categories from './components/Categories';
+import {getCategories} from "./actions/categories";
 import './App.css';
 
 class App extends Component {
+
+  componentWillMount(){
+    this.props.categories()
+  }
+
   render() {
+    console.log(this.props.categories())
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Header heading="Readable App"/>
+        <Categories/>
       </div>
     );
   }
 }
 
-export default App;
+function mapDispatchToProps(dispatch) {
+  return {
+    categories: () => dispatch(getCategories())
+  }
+};
+
+export default connect(null, mapDispatchToProps)(App);
