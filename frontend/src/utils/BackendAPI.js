@@ -1,12 +1,10 @@
+import uuid from 'uuid'
+
+const postID = require('uuid/v1')
 const api = 'http://localhost:3001'
 
-let token = localStorage.token
-if (!localStorage.token) {
-    token = localStorage.token = Math.random().toString(36).substr(-8)
-}
-
 const headers = {
-    'authenticity_token': token,
+    'Authorization': 'whatever-you-want',
     'Accept': 'application/json'
 }
 
@@ -15,26 +13,49 @@ export const getAllCategories = () =>
         .then(res => res.json())
         .then(data => data.categories)
 
-export const getPosts = () =>
+export const getCategoryPosts = (categoryId) =>
+    fetch(`${api}/${categoryId}/posts`, { headers })
+        .then(res => res.json())
+        .then(posts => posts)
+
+export const getAllPosts = () =>
     fetch(`${api}/posts`, { headers })
         .then(res => res.json())
         .then(posts => posts)
 
-export const createPost = (post) =>
+export const getPost = (id) =>
+    fetch(`${api}/posts/${id}`, { headers })
+        .then(res => res.json())
+        .then(data => data.post)
+
+export const createPost = (post) => {
+    const body = {
+        id: postID(),
+        timestamp: Date.now(),
+        ...post
+    }
     fetch(`${api}/posts`, {
         method: 'POST',
         headers: { ...headers },
-        body: JSON.stringify(post)
+        body: JSON.stringify(body),
     })
         .then(res => res.json())
         .then(data => data)
+}
 
-export const editPost = (post, id) =>
+export const editPost = (id, post) =>
     fetch(`${api}/posts/${id}`, {
-        method: 'UPDATE',
+        method: 'PUT',
         headers: { ...headers },
         body: JSON.stringify(post)
     })
         .then(res => res.json())
         .then(data => data)
 
+export const deletePost = (id) =>
+    fetch(`${api}/posts/${id}`, {
+        method: 'DELETE', 
+        headers: { ...headers }
+    })
+        .then(res => res.json())
+        .then(data => data.post)
