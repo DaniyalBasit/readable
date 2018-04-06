@@ -12,8 +12,9 @@ class App extends Component {
   }
 
   render() {
-    console.log("Props", this.props)
-    console.log(this.state)
+    // need help here
+    console.log("Category Prop:", this.props.categories) // not returning an array
+    console.log("State:", this.state)
     return (
       <div className="App">
         <Header heading="Readable App"/>
