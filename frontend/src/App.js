@@ -13,7 +13,7 @@ class App extends Component {
 
   render() {
     // need help here
-    console.log("Category Prop:", this.props.categories.categories) // not returning an array
+    console.log("Category Prop:", this.props.categories.categories)
     console.log("State:", this.state)
     return (
       <div className="App">
