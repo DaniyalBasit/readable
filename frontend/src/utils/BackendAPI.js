@@ -1,6 +1,4 @@
-import uuid from 'uuid'
-
-const postID = require('uuid/v1')
+export const postID = require('uuid/v1')
 const api = 'http://localhost:3001'
 
 const headers = {

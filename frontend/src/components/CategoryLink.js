@@ -1,12 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
 
 function CategoryLink(props) {
-    function handleChnage() {
-        props.onPress(props.name)
-    }
     return (
-        <button className="btn btn-category" onClick={handleChnage}>{props.name}</button>
+        <Link to={"/" + props.name} className="btn btn-category" >{props.name}</Link>
     )
 }
 
