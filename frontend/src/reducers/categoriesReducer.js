@@ -1,12 +1,15 @@
 import { GET_CATEGORIES } from "../actions/actionTypes";
 
-const categories = (state = {categories: []}, action) => {
+const initialstate = {
+    categories: []
+}
+
+const categories = (state = {initialstate}, action) => {
     const {categories} = action
 
     switch(action.type){
         case GET_CATEGORIES:
             return {
-                state,
                 ...categories
             }
         default:
