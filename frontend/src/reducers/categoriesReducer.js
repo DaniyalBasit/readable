@@ -6,7 +6,6 @@ const initialstate = {
 
 const categories = (state = {initialstate}, action) => {
     const {categories} = action
-    console.log(categories)
     switch(action.type){
         case GET_CATEGORIES:
             return {

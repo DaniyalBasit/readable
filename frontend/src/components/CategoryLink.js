@@ -8,5 +8,6 @@ const CategoryLink = (props) => (
 export default CategoryLink
 
 CategoryLink.prototype = {
+    key: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
 }
