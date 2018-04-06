@@ -5,7 +5,6 @@ import CategoryIndex from "./components/CategoryIndex";
 import Header from './components/Header';
 import CategoryLink from './components/CategoryLink';
 import { getCategories } from "./actions/categoriesAction";
-import { getPosts, getPostsFromCategory } from "./actions/postsAction";
 import { postID } from "./utils/BackendAPI";
 import './App.css';
 

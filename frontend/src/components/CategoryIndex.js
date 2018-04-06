@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Post from "./Post";
 import OrderPosts from "./OrderPosts";
-import { getCategories } from "../actions/categoriesAction";
 import { getPosts, getPostsFromCategory } from "../actions/postsAction";
 import { arrangePosts } from "../utils/Helper";
 
@@ -15,7 +14,7 @@ class CategoriesIndex extends Component {
 
     componentDidMount(){
         this.props.category 
-            ? this.props.categoryPosts(this.props.category)
+            ? this.props.categoryPosts(this.props.category.name)
             : this.props.allPosts()
     }
 
@@ -50,7 +49,7 @@ class CategoriesIndex extends Component {
 
 
 function mapStateToProps(state, props) {
-    return { ...state.categories, ...state.posts }
+    return { ...state.posts }
 };
 
 const mapDispatchToProps = dispatch => ({
