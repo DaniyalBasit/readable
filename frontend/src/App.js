@@ -9,17 +9,17 @@ import { postID } from "./utils/BackendAPI";
 import './App.css';
 
 class App extends Component {
-  componentWillMount(){
-    this.props.allCategories()
-  }
+	componentWillMount(){
+		this.props.allCategories()
+	}
 
-  render() {
+	render() {
 		const {categories} = this.props
-    return (
-      <div className="App">
+		return (
+			<div className="App">
 				<Header heading="Readable App"/>
 				<div className="filters">
-	        <Link to="/" className="btn btn-category" >Home</Link>				
+					<Link to="/" className="btn btn-category" >Home</Link>				
 					{ Array.isArray(categories) && categories.map((category) => 
 						<CategoryLink key={category.name} name = {category.name} /> 
 					)}
@@ -34,17 +34,17 @@ class App extends Component {
 				<Route exact path='/' render={()=>(
 					<CategoryIndex category={undefined}/>
 				)}/>
-      </div>
-    );
-  }
+			</div>
+		);
+	}
 }
 
 function mapStateToProps(state, props) {
-  return { ...state.categories }
+	return { ...state.categories }
 };
 
 const mapDispatchToProps = dispatch => ({
-  allCategories: () => dispatch(getCategories()),
+	allCategories: () => dispatch(getCategories()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
