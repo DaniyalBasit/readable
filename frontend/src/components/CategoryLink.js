@@ -1,13 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const CategoryLink = (props) => (
-    <button className="btn btn-category">{props.name}</button>
-)
+function CategoryLink(props) {
+    function handleChnage() {
+        props.onPress(props.name)
+    }
+    return (
+        <button className="btn btn-category" onClick={handleChnage}>{props.name}</button>
+    )
+}
 
 export default CategoryLink
 
 CategoryLink.prototype = {
-    key: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    onPress: PropTypes.func.isRequired
 }
