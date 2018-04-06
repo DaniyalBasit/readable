@@ -4,7 +4,6 @@ import { getAllCategories } from "../utils/BackendAPI"
 export const getCategories = () => {
     return dispatch => {getAllCategories()
         .then((categories) =>  {
-            console.log(categories)
             dispatch(setCategories(categories))
         })
     }

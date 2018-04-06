@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Header from './components/Header';
-import Categories from './components/Categories';
-import {getCategories} from "./actions/categories";
+import CategoryLink from './components/CategoryLink';
+import { getAllCategories } from "./utils/BackendAPI";
 import './App.css';
 
 class App extends Component {
 
+  state = {
+    categories: []
+  }
+
   componentWillMount(){
-    this.props.categories()
+    getAllCategories().then(
+      (categories) => {this.setState({categories})}
+    )
   }
 
   render() {
-    console.log(this.props.categories())
     return (
       <div className="App">
         <Header heading="Readable App"/>
-        <Categories/>
+        <div className="filters">
+          {this.state.categories.map((category) => <CategoryLink key={category.path} name = {category.name}/> )}
+        </div>
       </div>
     );
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    categories: () => dispatch(getCategories())
-  }
-};
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;
