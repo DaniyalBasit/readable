@@ -19,17 +19,17 @@ class App extends Component {
 			<div className="App">
 				<Header heading="Readable App"/>
 				<div className="filters">
-					<Link to="/" className="btn btn-category" >Home</Link>				
-					{ Array.isArray(categories) && categories.map((category) => 
-						<CategoryLink key={category.name} name = {category.name} /> 
+					<Link to="/" className="btn btn-category" >Home</Link>
+					{ Array.isArray(categories) && categories.map((category) =>
+						<CategoryLink key={category.name} name = {category.name} />
 					)}
 				</div>
-				{ Array.isArray(categories) && categories.map((category) => 
+				{ Array.isArray(categories) && categories.map((category) =>
 					<Switch key={postID()}>
 						<Route exact path={'/'+ category.name} render={()=>(
 							<CategoryIndex category={category}/>
 						)}/>
-					</Switch> 
+					</Switch>
 				)}
 				<Route exact path='/' render={()=>(
 					<CategoryIndex category={undefined}/>
