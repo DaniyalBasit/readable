@@ -1,4 +1,4 @@
-import { GET_POSTS } from "../actions/actionTypes";
+import { GET_POSTS, GET_CATEGORY_POSTS } from "../actions/actionTypes";
 
 const initialstate = {
     posts: []
@@ -6,9 +6,12 @@ const initialstate = {
 
 const posts = (state = {initialstate}, action) => {
     const {posts} = action
-    console.log(posts)
     switch(action.type){
         case GET_POSTS:
+            return {
+                posts
+            }
+        case GET_CATEGORY_POSTS:
             return {
                 posts
             }
