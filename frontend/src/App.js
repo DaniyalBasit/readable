@@ -13,14 +13,14 @@ class App extends Component {
 
   render() {
     // need help here
-    console.log("Category Prop:", this.props.categories) // not returning an array
+    console.log("Category Prop:", this.props.categories.categories) // not returning an array
     console.log("State:", this.state)
     return (
       <div className="App">
         <Header heading="Readable App"/>
         <div className="filters">
-          { Array.isArray(this.props.categories) &&
-            this.props.categories.map((category) => <CategoryLink key={category.path} name = {category.name}/> )}
+          { Array.isArray(this.props.categories.categories) &&
+            this.props.categories.categories.map((category) => <CategoryLink key={category.path} name = {category.name}/> )}
         </div>
       </div>
     );
