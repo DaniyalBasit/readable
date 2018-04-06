@@ -1,12 +1,12 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: sans-serif !important;
 }
 .heading{
   background: #39acf0;
   color: #fff;
-  padding: 1px;
+  padding: 1px 0 10px 0;
 }
 
 .btn{
@@ -20,15 +20,44 @@ body {
 }
 
 .btn-category{
-  background: #cfcfcf;
-  color: #666;
+  background: #dbdbdb;
+  color: #555;
 }
 
 .btn-category:hover {
-  background: #dbdbdb;
+  background: #eee;
   color: #555;
 }
 
 .filters{
   margin: 20px 0px;
+}
+
+.posts{
+  margin: auto;
+}
+
+.post{
+  border-color: #dbdbdb;
+  border-style: solid;
+  border-radius: 13px;
+  width: 400px;
+  height: auto;
+  margin: 10px 0;
+  padding: 0 !important;
+}
+
+.post-title{
+  background: #dbdbdb;
+  color: #555;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.post-author{
+  font-size: 12px;
+  text-align: left;
+  padding: 5px 15px;
 }
