@@ -10,13 +10,23 @@ import { customID } from "./utils/BackendAPI";
 import './App.css';
 
 class App extends Component {
+
+	state = {
+		renderPost: ''
+	}
+
 	componentWillMount(){
 		this.props.allCategories()
 	}
 
+	setPostId(id){
+		// console.log(id)
+		this.setState({renderPost: id})
+	}
+
 	render() {
-		const {categories, posts} = this.props
-		console.log(posts)
+		const {categories} = this.props
+		const postId = this.state.renderPost
 		return (
 			<div className="App">
 				<Header heading="Readable App"/>
@@ -29,23 +39,27 @@ class App extends Component {
 				{ Array.isArray(categories) && categories.map((category) =>
 					<Switch key={customID()}>
 						<Route exact path={'/'+ category.name} render={()=>(
-							<PostsIndex category={category}/>
+							<PostsIndex category={category} getPostId={this.setPostId}/>
 						)}/>
 					</Switch>
 				)}
 				<Route exact path='/' render={()=>(
-					<PostsIndex category={undefined}/>
+					<PostsIndex category={undefined} getPostId={this.setPostId}/>
 				)}/>
-				{Array.isArray(posts) && posts.map((post) =>
-					<Route exact path={'/posts/' + post.id} key={customID()} render={()=>(<PostView id={post.id} />)}/>
-				)}
+				{ postId !== '' &&
+					<Switch>
+						<Route exact path={'/posts/'+postId} key={customID()} render={()=>(
+							<PostView id={postId} />
+						)}/>
+					</Switch>
+				}
 			</div>
 		);
 	}
 }
 
 function mapStateToProps(state, props) {
-	return { ...state.categories, ...state.posts }
+	return { ...state.categories }
 };
 
 const mapDispatchToProps = dispatch => ({

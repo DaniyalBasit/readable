@@ -19,6 +19,7 @@ export const getPostsFromCategory = (category) => {
 export const getPostInfo = (id) => {
     return dispatch => { getPost(id)
         .then((post)=>{
+            console.log(post)
             dispatch(setPost(post))
         })
     }

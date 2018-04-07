@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {Link, withRouter } from 'react-router-dom';
 import Post from "./Post";
 import OrderPosts from "./OrderPosts";
-import { getPosts, getPostsFromCategory, getPostInfo } from "../actions/postsAction";
+import { getPosts, getPostsFromCategory } from "../actions/postsAction";
 import { arrangePosts } from "../utils/Helper";
 import { customID } from "../utils/BackendAPI";
 
@@ -33,7 +33,7 @@ class CategoriesIndex extends Component {
 				<div className="container">
 					{ Array.isArray(posts) && posts !== [] &&
 						arrangePosts(posts, this.state.currentOrder).map((post)=>
-						<Link to={'/posts/' + post.id} key={customID()} onClick={()=>this.props.getPost(post.id)}>
+						<Link to={'/posts/' + post.id} key={customID()} onClick={()=>this.props.getPostId(post.id)}>
 							<Post
 								id={post.id}
 								title={post.title}
@@ -57,7 +57,6 @@ function mapStateToProps(state, props) {
 const mapDispatchToProps = dispatch => ({
 	allPosts: () => dispatch(getPosts()),
 	categoryPosts: (category) => dispatch(getPostsFromCategory(category)),
-	getPost: (id) => dispatch(getPostInfo(id))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CategoriesIndex));
