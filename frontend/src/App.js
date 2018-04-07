@@ -24,7 +24,6 @@ class App extends Component {
 	
 	render() {
 		const {categories, post} = this.props
-		console.log(post)
 		return (
 			<div className="App">
 				<Header heading="Readable App"/>
@@ -42,7 +41,7 @@ class App extends Component {
 					</Switch>
 				)}
 				<Route exact path='/' render={()=>(
-					<PostsIndex category={undefined}/>
+					<PostsIndex category={undefined} getPostId={this.setPostId}/>
 				)}/>
 				{ post &&
 					<Switch>
