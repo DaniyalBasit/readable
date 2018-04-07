@@ -6,27 +6,20 @@ import Header from './components/Header';
 import CategoryLink from './components/CategoryLink';
 import PostView from "./components/PostView";
 import { getCategories } from "./actions/categoriesAction";
+import { getPostInfo } from "./actions/postsAction";
 import { customID } from "./utils/BackendAPI";
 import './App.css';
 
 class App extends Component {
 
-	state = {
-		renderPost: ''
-	}
-
 	componentWillMount(){
 		this.props.allCategories()
+		this.props.location.pathname.split('/')[2] &&
+			this.props.getPost(this.props.location.pathname.split('/')[2])
 	}
-
-	setPostId(id){
-		// console.log(id)
-		this.setState({renderPost: id})
-	}
-
+	
 	render() {
-		const {categories} = this.props
-		const postId = this.state.renderPost
+		const {categories, post} = this.props
 		return (
 			<div className="App">
 				<Header heading="Readable App"/>
@@ -39,17 +32,21 @@ class App extends Component {
 				{ Array.isArray(categories) && categories.map((category) =>
 					<Switch key={customID()}>
 						<Route exact path={'/'+ category.name} render={()=>(
-							<PostsIndex category={category} getPostId={this.setPostId}/>
+							<PostsIndex category={category}/>
 						)}/>
 					</Switch>
 				)}
 				<Route exact path='/' render={()=>(
-					<PostsIndex category={undefined} getPostId={this.setPostId}/>
+					<PostsIndex category={undefined}/>
 				)}/>
-				{ postId !== '' &&
+				{ post &&
 					<Switch>
-						<Route exact path={'/posts/'+postId} key={customID()} render={()=>(
-							<PostView id={postId} />
+						<Route exact path={'/posts/'+post.id} key={customID()} render={()=>(
+							<PostView 
+								id={post.id}
+								title={post.title}
+								body={post.body} 
+							/>
 						)}/>
 					</Switch>
 				}
@@ -59,11 +56,12 @@ class App extends Component {
 }
 
 function mapStateToProps(state, props) {
-	return { ...state.categories }
+	return { ...state.categories, ...state.post }
 };
 
 const mapDispatchToProps = dispatch => ({
 	allCategories: () => dispatch(getCategories()),
+	getPost: (id) => dispatch(getPostInfo(id)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

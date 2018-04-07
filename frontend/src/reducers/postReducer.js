@@ -6,7 +6,6 @@ const initialstate = {
 
 const post = (state = {initialstate}, action) => {
 	const {post} = action
-	console.log("Post In reducer:", post)
 	switch(action.type){
         case GET_POST:
             return {
