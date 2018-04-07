@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter, Link} from 'react-router-dom';
-import CategoryIndex from "./components/CategoryIndex";
+import PostsIndex from "./components/PostsIndex";
 import Header from './components/Header';
 import CategoryLink from './components/CategoryLink';
+import PostView from "./components/PostView";
 import { getCategories } from "./actions/categoriesAction";
-import { postID } from "./utils/BackendAPI";
+import { customID } from "./utils/BackendAPI";
 import './App.css';
 
 class App extends Component {
@@ -14,7 +15,8 @@ class App extends Component {
 	}
 
 	render() {
-		const {categories} = this.props
+		const {categories, posts} = this.props
+		console.log(posts)
 		return (
 			<div className="App">
 				<Header heading="Readable App"/>
@@ -25,22 +27,25 @@ class App extends Component {
 					)}
 				</div>
 				{ Array.isArray(categories) && categories.map((category) =>
-					<Switch key={postID()}>
+					<Switch key={customID()}>
 						<Route exact path={'/'+ category.name} render={()=>(
-							<CategoryIndex category={category}/>
+							<PostsIndex category={category}/>
 						)}/>
 					</Switch>
 				)}
 				<Route exact path='/' render={()=>(
-					<CategoryIndex category={undefined}/>
+					<PostsIndex category={undefined}/>
 				)}/>
+				{Array.isArray(posts) && posts.map((post) =>
+					<Route exact path={'/posts/' + post.id} key={customID()} render={()=>(<PostView id={post.id} />)}/>
+				)}
 			</div>
 		);
 	}
 }
 
 function mapStateToProps(state, props) {
-	return { ...state.categories }
+	return { ...state.categories, ...state.posts }
 };
 
 const mapDispatchToProps = dispatch => ({
