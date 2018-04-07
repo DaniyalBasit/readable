@@ -6,17 +6,20 @@ import Header from './components/Header';
 import CategoryLink from './components/CategoryLink';
 import PostView from "./components/PostView";
 import { getCategories } from "./actions/categoriesAction";
+import { getPostInfo } from "./actions/postsAction";
 import { customID } from "./utils/BackendAPI";
 import './App.css';
 
 class App extends Component {
+
 	componentWillMount(){
 		this.props.allCategories()
+		this.props.location.pathname.split('/')[2] &&
+			this.props.getPost(this.props.location.pathname.split('/')[2])
 	}
-
+	
 	render() {
-		const {categories, posts} = this.props
-		console.log(posts)
+		const {categories, post} = this.props
 		return (
 			<div className="App">
 				<Header heading="Readable App"/>
@@ -36,20 +39,29 @@ class App extends Component {
 				<Route exact path='/' render={()=>(
 					<PostsIndex category={undefined}/>
 				)}/>
-				{Array.isArray(posts) && posts.map((post) =>
-					<Route exact path={'/posts/' + post.id} key={customID()} render={()=>(<PostView id={post.id} />)}/>
-				)}
+				{ post &&
+					<Switch>
+						<Route exact path={'/posts/'+post.id} key={customID()} render={()=>(
+							<PostView 
+								id={post.id}
+								title={post.title}
+								body={post.body} 
+							/>
+						)}/>
+					</Switch>
+				}
 			</div>
 		);
 	}
 }
 
 function mapStateToProps(state, props) {
-	return { ...state.categories, ...state.posts }
+	return { ...state.categories, ...state.post }
 };
 
 const mapDispatchToProps = dispatch => ({
 	allCategories: () => dispatch(getCategories()),
+	getPost: (id) => dispatch(getPostInfo(id)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
