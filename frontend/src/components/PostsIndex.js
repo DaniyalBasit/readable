@@ -33,7 +33,7 @@ class CategoriesIndex extends Component {
 				<div className="container">
 					{ Array.isArray(posts) && posts !== [] &&
 						arrangePosts(posts, this.state.currentOrder).map((post)=>
-						<Link to={'/posts/' + post.id} key={customID()}>
+						<Link to={'/posts/' + post.id} key={customID()} onClick={()=>this.props.getPostId(post.id)}>
 							<Post
 								id={post.id}
 								title={post.title}

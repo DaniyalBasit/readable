@@ -17,6 +17,11 @@ class App extends Component {
 		this.props.location.pathname.split('/')[2] &&
 			this.props.getPost(this.props.location.pathname.split('/')[2])
 	}
+
+	setPostId(id){
+		console.log(id)
+		this.props.getPost(id)
+	}
 	
 	render() {
 		const {categories, post} = this.props
@@ -32,7 +37,7 @@ class App extends Component {
 				{ Array.isArray(categories) && categories.map((category) =>
 					<Switch key={customID()}>
 						<Route exact path={'/'+ category.name} render={()=>(
-							<PostsIndex category={category}/>
+							<PostsIndex category={category} getPostId={this.setPostId}/>
 						)}/>
 					</Switch>
 				)}
