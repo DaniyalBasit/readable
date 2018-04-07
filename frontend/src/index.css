@@ -26,8 +26,8 @@ body {
 }
 
 .btn-category:hover {
-  background: #aaa;
-  color: #fff;
+  background: #1771C8;
+  color: #fff !important;
 }
 
 .filters{
@@ -69,4 +69,8 @@ body {
 
 .order p {
   margin-bottom: 10px;
+}
+
+.comments{
+  margin: 10px;
 }

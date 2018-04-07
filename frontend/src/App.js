@@ -17,10 +17,6 @@ class App extends Component {
 		this.props.location.pathname.split('/')[2] &&
 			this.props.getPost(this.props.location.pathname.split('/')[2])
 	}
-
-	setPostId(id){
-		this.props.getPost(id)
-	}
 	
 	render() {
 		const {categories, post} = this.props
@@ -36,20 +32,22 @@ class App extends Component {
 				{ Array.isArray(categories) && categories.map((category) =>
 					<Switch key={customID()}>
 						<Route exact path={'/'+ category.name} render={()=>(
-							<PostsIndex category={category} getPostId={this.setPostId}/>
+							<PostsIndex category={category} />
 						)}/>
 					</Switch>
 				)}
 				<Route exact path='/' render={()=>(
-					<PostsIndex category={undefined} getPostId={this.setPostId}/>
+					<PostsIndex category={undefined}/>
 				)}/>
 				{ post &&
 					<Switch>
 						<Route exact path={'/posts/'+post.id} key={customID()} render={()=>(
 							<PostView 
-								id={post.id}
 								title={post.title}
-								body={post.body} 
+								body={post.body}
+								author={post.author}
+								timestamp={post.timestamp}
+								voteScore={post.voteScore} 
 							/>
 						)}/>
 					</Switch>
