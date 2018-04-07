@@ -19,12 +19,12 @@ class App extends Component {
 	}
 
 	setPostId(id){
-		console.log(id)
 		this.props.getPost(id)
 	}
 	
 	render() {
 		const {categories, post} = this.props
+		console.log(post)
 		return (
 			<div className="App">
 				<Header heading="Readable App"/>

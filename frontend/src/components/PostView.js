@@ -5,10 +5,13 @@ import { withRouter} from 'react-router-dom';
 
 class PostView extends Component {
     render(){
-        const {id} = this.props
+        const {id, title, body} = this.props
         console.log("Post in its view:", id)
         return (
-            <div>This is a test</div>
+            <div>
+                <h3>{title}</h3>
+                <div>{body}</div>
+            </div>
         )
     }
 }
