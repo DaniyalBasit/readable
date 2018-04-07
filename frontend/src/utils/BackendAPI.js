@@ -1,4 +1,4 @@
-export const postID = require('uuid/v1')
+export const customID = require('uuid/v1')
 const api = 'http://localhost:3001'
 
 const headers = {
@@ -24,11 +24,11 @@ export const getAllPosts = () =>
 export const getPost = (id) =>
 	fetch(`${api}/posts/${id}`, { headers })
 		.then(res => res.json())
-		.then(data => data.post)
+		.then(data => data)
 
 export const createPost = (post) => {
 	const body = {
-		id: postID(),
+		id: customID(),
 		timestamp: Date.now(),
 		...post
 	}
