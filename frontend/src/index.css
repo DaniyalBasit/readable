@@ -1,9 +1,30 @@
+@import url('https://use.fontawesome.com/releases/v5.0.9/css/all.css');
+
 body {
   margin: 0;
   padding: 0;
   background: #f5f5f5 !important;
   font-family: sans-serif !important;
 }
+
+input{
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: solid;
+  background: inherit;
+  margin: 10px 20px;
+}
+
+label{
+  width: 500px;
+  margin: 15px 0;
+}
+
+form{
+  width: 600px;
+}
+
 .heading{
   background: dodgerblue;
   color: #fff;
@@ -26,8 +47,19 @@ body {
 }
 
 .btn-category:hover {
-  background: #aaa;
-  color: #fff;
+  background: #1771C8;
+  color: #fff !important;
+}
+
+.btn-new{
+  bottom: 30px;
+  right: 40px;
+  width: 50px;
+  position: fixed;
+  background: dodgerblue;
+  color: white;
+  border-radius: 60%;
+  padding: 15px;
 }
 
 .filters{
@@ -57,10 +89,17 @@ body {
   padding: 10px 0;
 }
 
-.post-author{
+.post-element{
   font-size: 12px;
-  text-align: left;
   padding: 5px 15px;
+}
+
+.pull-left{
+  text-align: left;
+}
+
+.pull-right{
+  text-align: right;
 }
 
 .order{
@@ -69,4 +108,22 @@ body {
 
 .order p {
   margin-bottom: 10px;
+}
+
+.votes{
+  padding-top: 22px;
+}
+
+.vote-score{
+  padding-right: 3px;
+}
+
+.comments{
+  margin: 10px;
+}
+
+.form-select{
+  margin: 20px 0 15px 0;
+  padding: 10px;
+  box-decoration-break: inherit;
 }

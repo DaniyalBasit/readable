@@ -9,6 +9,7 @@ const categories = (state = {initialstate}, action) => {
 	switch(action.type){
 		case GET_CATEGORIES:
 			return {
+				...state,
 				categories
 			}
 		default:

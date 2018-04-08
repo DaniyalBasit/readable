@@ -1,5 +1,5 @@
-import { GET_POSTS, GET_CATEGORY_POSTS, GET_POST } from "./actionTypes"
-import { getAllPosts, getCategoryPosts, getPost } from "../utils/BackendAPI"
+import { GET_POSTS, GET_CATEGORY_POSTS, GET_POST, POST_VOTE, NEW_POST } from "./actionTypes"
+import { getAllPosts, getCategoryPosts, getPost, updatePostVote, createPost } from "../utils/BackendAPI"
 
 export const getPosts = () => {
     return dispatch => {getAllPosts()
@@ -24,6 +24,20 @@ export const getPostInfo = (id) => {
     }
 }
 
+export const postOption = (id, option) => {
+    return dispatch => { updatePostVote(id, option)
+        .then((post)=>{
+            dispatch(sendVote(post))
+        })
+    }
+}
+
+export const newPost = (post) => {
+    return dispatch => {createPost(post)
+        dispatch(newPostCreated(post))
+    }
+}
+
 export const setPosts = (posts) => ({
     type: GET_POSTS,
     posts
@@ -37,4 +51,14 @@ export const setPost = (post) => ({
     post
 })
 
-export default {getPosts, getPostsFromCategory}
+export const newPostCreated = (post) => ({
+    type: NEW_POST,
+    post
+})
+
+export const sendVote = (post) => ({
+    type: POST_VOTE,
+    post
+})
+
+export default {getPosts, getPostsFromCategory, getPostInfo, postOption}
