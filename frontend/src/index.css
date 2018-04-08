@@ -62,6 +62,23 @@ form{
   padding: 15px;
 }
 
+.btn-delete{
+  background: dodgerblue;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: white;
+  display: block;
+  margin: 10px 30px;
+}
+
+.btn-delete:hover{
+  text-decoration: none;
+  color: white;
+  background: #23527c;
+}
+
 .filters{
   padding: 20px 0px;
 }

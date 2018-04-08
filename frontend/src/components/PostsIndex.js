@@ -25,7 +25,7 @@ class CategoriesIndex extends Component {
 
 	render() {
 		const {category, posts} = this.props
-		const categoryName = category ? category.name : "Home"
+		const categoryName = category ? category.name : "home"
 		return(
 			<div>
 				<h2>{categoryName}</h2>

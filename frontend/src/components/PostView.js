@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { withRouter} from 'react-router-dom';
+import { withRouter, Link} from 'react-router-dom';
 import Comments from "./Comments";
 import VoteScore from "./VoteScore";
+import { deletePost, resetRedirect } from "../actions/postsAction";
 
 class PostView extends Component {
+    componentDidMount(){
+        this.props.reDirectReset()
+    }
     render(){
         const {id, title, body, author, timestamp, voteScore} = this.props.post
         const date = new Date(timestamp)
@@ -20,6 +24,10 @@ class PostView extends Component {
                     <div>{body}</div>
                     <Comments />
                 </div>
+                <div className="col-xs-2">
+                    <Link to={'/posts/' + id +'/edit'} className="btn-delete">Edit Post</Link>
+                    <a onClick={()=>this.props.deletePost(id)} className="btn-delete">Delete Post</a>
+                </div>
             </div>
         )
     }
@@ -29,4 +37,9 @@ function mapStateToProps(state, props) {
 	return { ...state.post }
 };
 
-export default withRouter(connect(mapStateToProps)(PostView));
+const mapDispatchToProps = (dispatch) => ({
+    deletePost: (id) => dispatch(deletePost(id)),
+	reDirectReset: () => dispatch(resetRedirect())    
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostView));
