@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch, withRouter, Link} from 'react-router-dom';
+import { Route, Switch, withRouter, Link, Redirect} from 'react-router-dom';
 import PostsIndex from "./components/PostsIndex";
 import Header from './components/Header';
 import CategoryLink from './components/CategoryLink';
 import PostView from "./components/PostView";
+import PostForm from "./components/PostForm";
 import { getCategories } from "./actions/categoriesAction";
-import { getPostInfo } from "./actions/postsAction";
+import { getPostInfo, newPost } from "./actions/postsAction";
 import { customID } from "./utils/BackendAPI";
 import './App.css';
 
@@ -17,9 +18,18 @@ class App extends Component {
 		this.props.location.pathname.split('/')[2] &&
 			this.props.getPost(this.props.location.pathname.split('/')[2])
 	}
+
+	submit(values){
+		const post = {
+			id: customID(),
+			timestamp: Date.now(),
+			...values
+		}
+		this.props.createNewpost(post)
+	}
 	
 	render() {
-		const {categories, post} = this.props
+		const {categories, post, redirect} = this.props
 		return (
 			<div className="App">
 				<Header heading="Readable App"/>
@@ -42,28 +52,29 @@ class App extends Component {
 				{ post &&
 					<Switch>
 						<Route exact path={'/posts/'+post.id} key={customID()} render={()=>(
-							<PostView 
-								title={post.title}
-								body={post.body}
-								author={post.author}
-								timestamp={post.timestamp}
-								voteScore={post.voteScore} 
-							/>
+							<PostView />
 						)}/>
 					</Switch>
 				}
+				{ redirect && post && <Redirect to={'/posts/'+post.id}/>}
+				<Switch>
+					<Route exact path='/posts/new' key={customID()} render={()=>(
+						<PostForm onSubmit={this.submit.bind(this)} categories={categories} />
+					)}/>
+				</Switch>
 			</div>
 		);
 	}
 }
 
 function mapStateToProps(state, props) {
-	return { ...state.categories, ...state.post }
+	return { ...state.categories, ...state.post, ...state.redirect }
 };
 
 const mapDispatchToProps = dispatch => ({
 	allCategories: () => dispatch(getCategories()),
 	getPost: (id) => dispatch(getPostInfo(id)),
+	createNewpost: (post) => dispatch(newPost(post))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

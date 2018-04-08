@@ -9,10 +9,12 @@ const posts = (state = {initialstate}, action) => {
 	switch(action.type){
 		case GET_POSTS:
 			return {
+				...state,
 				posts
 			}
 		case GET_CATEGORY_POSTS:
 			return {
+				...state,
 				posts
 			}
 		default:

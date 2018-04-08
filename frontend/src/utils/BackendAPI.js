@@ -1,3 +1,5 @@
+import comments from '../reducers/commentsReducer';
+
 export const customID = require('uuid/v1')
 const api = 'http://localhost:3001'
 
@@ -27,15 +29,11 @@ export const getPost = (id) =>
 		.then(data => data)
 
 export const createPost = (post) => {
-	const body = {
-		id: customID(),
-		timestamp: Date.now(),
-		...post
-	}
+	console.log(post)
 	fetch(`${api}/posts`, {
 		method: 'POST',
-		headers: { ...headers },
-		body: JSON.stringify(body),
+		headers: { ...headers, 'Content-Type': 'application/json' },
+		body: JSON.stringify(post),
 	})
 		.then(res => res.json())
 		.then(data => data)
@@ -57,3 +55,18 @@ export const deletePost = (id) =>
 	})
 		.then(res => res.json())
 		.then(data => data.post)
+
+export const updatePostVote = (id, option) =>
+	fetch(`${api}/posts/${id}`, {
+		method: 'POST',
+		headers: { ...headers },
+		body: {option: option}
+	})
+		.then(res => res.json())
+		.then(data => data)
+
+
+export const getAllComments = (postId) =>
+	fetch(`${api}/posts/${postId}/comments`, { headers })
+		.then(res => res.json())
+		.then(comments => comments)
