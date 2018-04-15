@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form'
 
 let PostEditForm = (props) => {
-    const {handleSubmit, categories, post, pristine } = props
+    const {handleSubmit, categories, post } = props
     return (
         <div className="container">
             <h3>Create New Post</h3>

@@ -12,3 +12,5 @@ export const DELETE_POST = 'DELETE_POST';
 
 export const RESET_REDIRECT = 'RESET_REDIRECT';
 export const RESET_HOME = 'RESET_HOME';
+
+export const EMPTY_POST = 'EMPTY_POST';

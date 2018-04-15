@@ -22,7 +22,9 @@ class App extends Component {
 	}
 
 	submit(values){
-		const ID = this.props.post ? this.props.post.id : customID()
+		const ID = this.props.post && this.props.post.id 
+			? this.props.post.id 
+			: customID()
 		const post = {
 			id: ID,
 			timestamp: Date.now(),
@@ -54,15 +56,15 @@ class App extends Component {
 				)}/>
 				{ post &&
 					<Switch>
-						<Route exact path={'/posts/'+post.id} key={customID()} render={()=>(
+						<Route exact path={'/' + post.category + '/' + post.id} key={customID()} render={()=>(
 							<PostView />
 						)}/>
-						<Route exact path={'/posts/' + post.id +'/edit'} render={()=>(
+						<Route exact path={'/' + post.category + '/' + post.id +'/edit'} render={()=>(
 							<PostEditForm onSubmit={this.submit.bind(this)} categories={categories} />
 						)}/>
 					</Switch>
 				}
-				{ redirect && post && <Redirect to={'/posts/'+post.id}/>}
+				{ redirect && post && <Redirect to={'/' + post.category + '/' + post.id}/>}
 				{ home && <Redirect to='/' />}
 				<Switch>
 					<Route exact path='/posts/new' render={()=>(

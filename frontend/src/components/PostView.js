@@ -10,7 +10,7 @@ class PostView extends Component {
         this.props.reDirectReset()
     }
     render(){
-        const {id, title, body, author, timestamp, voteScore} = this.props.post
+        const {id, title, body, author, timestamp, voteScore, category} = this.props.post
         const date = new Date(timestamp)
         return (
             <div className="container">
@@ -25,7 +25,7 @@ class PostView extends Component {
                     <Comments />
                 </div>
                 <div className="col-xs-2">
-                    <Link to={'/posts/' + id +'/edit'} className="btn-delete">Edit Post</Link>
+                    <Link to={'/' + category + '/' + id +'/edit'} className="btn-delete">Edit Post</Link>
                     <a onClick={()=>this.props.deletePost(id)} className="btn-delete">Delete Post</a>
                 </div>
             </div>

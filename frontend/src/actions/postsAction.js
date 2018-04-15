@@ -1,7 +1,7 @@
 import {
     GET_POSTS, GET_CATEGORY_POSTS, GET_POST,
     POST_VOTE, NEW_POST, DELETE_POST,
-    RESET_REDIRECT, RESET_HOME
+    RESET_REDIRECT, RESET_HOME, EMPTY_POST
 } from "./actionTypes"
 import {
     getAllPosts, getCategoryPosts, getPost,
@@ -76,6 +76,10 @@ export const newPostCreated = (post) => ({
 export const sendVote = (post) => ({
     type: POST_VOTE,
     post
+})
+
+export const emptyPost = () => ({
+    type: EMPTY_POST
 })
 
 export default {getPosts, getPostsFromCategory, getPostInfo, postOption}

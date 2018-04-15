@@ -1,7 +1,7 @@
 import {
 	GET_POST, POST_VOTE,
 	NEW_POST, DELETE_POST,
-	RESET_HOME, RESET_REDIRECT
+	RESET_HOME, RESET_REDIRECT, EMPTY_POST
 } from "../actions/actionTypes";
 
 const initialstate = {
@@ -52,6 +52,11 @@ const post = (state = {initialstate}, action) => {
 				...state,
 				home: false,
 				redirect: false
+			}
+		case EMPTY_POST:
+			return {
+				...state,
+				post: {}
 			}
 		default:
 			return state

@@ -55,12 +55,12 @@ export const softDeletePost = (id) =>
 		.then(res => res.json())
 		.then(data => data.post)
 
-export const updatePostVote = (id, option) => {
-	console.log(option)
+export const updatePostVote = (id, vote) => {
+	console.log(vote)
 	fetch(`${api}/posts/${id}`, {
 		method: 'POST',
-		headers: { ...headers, 'Content-Type':'application/x-www-form-urlencoded' },
-		body: option
+		headers: { 'Authorization': 'whatever-you-want', 'Content-Type':'text' },
+		option: vote
 	})
 		.then(res => res.json())
 		.then(data => data)
