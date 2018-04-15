@@ -22,7 +22,7 @@ class App extends Component {
 	}
 
 	submit(values){
-		const ID = this.props.post.id ? this.props.post.id : customID()
+		const ID = this.props.post ? this.props.post.id : customID()
 		const post = {
 			id: ID,
 			timestamp: Date.now(),
