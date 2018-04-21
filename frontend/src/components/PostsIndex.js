@@ -25,7 +25,7 @@ class CategoriesIndex extends Component {
 
 	render() {
 		const {category, posts} = this.props
-		const categoryName = category ? category.name : "Home"
+		const categoryName = category ? category.name : "home"
 		return(
 			<div>
 				<h2>{categoryName}</h2>
@@ -40,7 +40,7 @@ class CategoriesIndex extends Component {
 							<div className="col-xs-2">
 								<VoteScore voteScore={post.voteScore} id={post.id} />				
 							</div>
-							<Link to={'/posts/' + post.id}>
+							<Link to={post.category + '/' + post.id}>
 								<Post
 									id={post.id}
 									title={post.title}

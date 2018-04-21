@@ -29,7 +29,6 @@ export const getPost = (id) =>
 		.then(data => data)
 
 export const createPost = (post) => {
-	console.log(post)
 	fetch(`${api}/posts`, {
 		method: 'POST',
 		headers: { ...headers, 'Content-Type': 'application/json' },
@@ -42,29 +41,30 @@ export const createPost = (post) => {
 export const editPost = (id, post) =>
 	fetch(`${api}/posts/${id}`, {
 		method: 'PUT',
-		headers: { ...headers },
+		headers: { ...headers, 'Content-Type': 'application/json' },
 		body: JSON.stringify(post)
 	})
 		.then(res => res.json())
 		.then(data => data)
 
-export const deletePost = (id) =>
+export const softDeletePost = (id) =>
 	fetch(`${api}/posts/${id}`, {
 		method: 'DELETE', 
-		headers: { ...headers }
+		headers: { ...headers, 'Content-Type': 'application/json' }
 	})
 		.then(res => res.json())
 		.then(data => data.post)
 
-export const updatePostVote = (id, option) =>
+export const updatePostVote = (id, vote) => {
+	console.log(vote)
 	fetch(`${api}/posts/${id}`, {
 		method: 'POST',
-		headers: { ...headers },
-		body: {option: option}
+		headers: { 'Authorization': 'whatever-you-want', 'Content-Type':'text' },
+		option: vote
 	})
 		.then(res => res.json())
 		.then(data => data)
-
+}
 
 export const getAllComments = (postId) =>
 	fetch(`${api}/posts/${postId}/comments`, { headers })
